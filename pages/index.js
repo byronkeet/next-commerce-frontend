@@ -4,7 +4,7 @@ import { Product, FooterBanner, HeroBanner } from '../components';
 import { client } from '../lib/client';
 
 const Home = ({ products, bannerData }) => {
-	console.log(products, bannerData)
+
 	return (
 		<Fragment>
 			<HeroBanner heroBanner={bannerData.length > 0 && bannerData[0]}/>
@@ -20,7 +20,7 @@ const Home = ({ products, bannerData }) => {
 				))}
 			</div>
 
-			<FooterBanner />
+			<FooterBanner footerBanner={bannerData && bannerData[0]} />
 		</Fragment>
 	)
 }
