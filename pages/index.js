@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import banner from '../../backend/schemas/banner';
 
 import { Product, FooterBanner, HeroBanner } from '../components';
 import { client } from '../lib/client';
@@ -17,7 +16,7 @@ const Home = ({ products, bannerData }) => {
 
 			<div className='products-container'>
 				{products && products.map((product) => (
-					product.name
+					<Product key={product._id} product={product} />
 				))}
 			</div>
 
