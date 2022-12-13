@@ -37,7 +37,7 @@ export const StateContext = ({ children }) => {
 
 	const onRemove = (product) => {
 		const foundProduct = cartItems.find((cartItem) => cartItem._id === product._id);
-		const newCartItems = cartItems.filter((cartItem) => cartItem._id !== product.id);
+		const newCartItems = cartItems.filter((cartItem) => cartItem._id !== product._id);
 
 		setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price * foundProduct.quantity);
 
