@@ -49,14 +49,33 @@ export const StateContext = ({ children }) => {
 	const toggleCartItemQuanitity = (id, value) => {
 		const foundProduct = cartItems.find((cartItem) => cartItem._id === id);
 
-		const newCartItems = cartItems.filter((cartItem) => cartItem._id !== id);
+		let updatedCartItems;
 
 		if (value === 'inc') {
-			setCartItems([ ...newCartItems, { ...foundProduct, quantity: foundProduct.quantity + 1 } ]);
+			updatedCartItems = cartItems.map((cartItem) => {
+			
+				if (cartItem._id === id ) {
+					return { ...cartItem, quantity: cartItem.quantity + 1 } 
+				} else {
+					return cartItem;
+				}
+			
+			});
+			setCartItems(updatedCartItems);
 			setTotalPrice((prevTotalPrice) => prevTotalPrice + foundProduct.price);
 			setTotalQuantities((prevTotalQuantities) => prevTotalQuantities + 1);
 		} else if (value === 'dec') {
-			setCartItems([...newCartItems, { ...foundProduct, quantity: foundProduct.quantity - 1 } ]);
+			if ( foundProduct.quantity == 0 ) return;
+			updatedCartItems = cartItems.map((cartItem) => {
+			
+				if (cartItem._id === id ) {
+					return { ...cartItem, quantity: cartItem.quantity - 1  }
+				} else {
+					return cartItem;
+				}
+			
+			});
+			setCartItems(updatedCartItems);
 			setTotalPrice((prevTotalPrice) => prevTotalPrice - foundProduct.price);
 			setTotalQuantities((prevTotalQuantities) => prevTotalQuantities - 1);
 		}
